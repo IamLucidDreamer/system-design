@@ -14,18 +14,16 @@ class RateLimiter {
 
   #checkOrCreateUserExist(userId, timestamp) {
     if (!this.#rateLimitCounterDetail.has(userId)) {
-      return this.#rateLimitCounterDetail.set(userId, {
+        this.#rateLimitCounterDetail.set(userId, {
         token:  this.#rateLimit,
         lastRefill: timestamp,
       });
+      return
     }
   }
 
   #getUserData(userId) {
-    if (this.#rateLimitCounterDetail.has(userId)) {
       return this.#rateLimitCounterDetail.get(userId);
-    }
-    return "User Does not Exist";
   }
 
   #calculateRefillInToken(userData, timestamp) {
